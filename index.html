@@ -13,7 +13,14 @@
     <p class="text-center text-gray-700 mb-6">📍 地点：16152 Gale Ave, Hacienda Heights, CA, 91745 教会二楼</p>
     <p class="text-center text-lg font-semibold mb-6">请大家点击按钮选择是否参加 🙌</p>
 
-    <form id="rsvp-form" class="flex flex-col gap-4">
+    <!-- 重点：action 设置为你的 Apps Script URL，method 用 POST -->
+    <form
+            action="https://script.google.com/macros/s/AKfycbzvhS6C6bYFI3Zh2aTdPSDgXfzSoVxXbJxk9C_OirXccMASS4TI-626fWSxPkwVe8fP/exec"
+            method="POST"
+            target="hidden_iframe"
+            onsubmit="alert('✅ 感谢填写，我们已记录您的回复！'); this.reset();"
+            class="flex flex-col gap-4"
+    >
         <input type="text" name="name" placeholder="姓名" required
                class="border border-gray-300 rounded-lg p-3 w-full" />
 
@@ -44,35 +51,10 @@
         </button>
     </form>
 
+    <!-- 隐藏iframe，表单提交后页面不会跳转 -->
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+
     <p class="mt-8 text-center text-sm text-gray-500">📞 联系方式：626-253-5600</p>
 </div>
-
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzvhS6C6bYFI3Zh2aTdPSDgXfzSoVxXbJxk9C_OirXccMASS4TI-626fWSxPkwVe8fP/exec';
-    const form = document.getElementById('rsvp-form');
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        fetch(scriptURL, {
-            method: 'POST',
-            body: formData,
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert("✅ 感谢填写，我们已记录您的回复！");
-                    form.reset();
-                } else {
-                    alert("❌ 提交失败，请稍后重试");
-                }
-            })
-            .catch(error => {
-                alert("❌ 提交失败，请稍后重试");
-                console.error('Error!', error.message);
-            });
-    });
-</script>
 </body>
 </html>
