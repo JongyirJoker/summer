@@ -13,23 +13,21 @@
     <p class="text-center text-gray-700 mb-6">📍 地点：16152 Gale Ave, Hacienda Heights, CA, 91745 教会二楼</p>
     <p class="text-center text-lg font-semibold mb-6">请大家点击按钮选择是否参加 🙌</p>
 
-    <!-- 重点：action 设置为你的 Apps Script URL，method 用 POST -->
     <form
             action="https://script.google.com/macros/s/AKfycbzvhS6C6bYFI3Zh2aTdPSDgXfzSoVxXbJxk9C_OirXccMASS4TI-626fWSxPkwVe8fP/exec"
             method="POST"
             onsubmit="alert('✅ 感谢填写，我们已记录您的回复！');"
             class="flex flex-col gap-4"
     >
-
-
-    <input type="text" name="name" placeholder="姓名" required
+        <input type="text" name="name" placeholder="姓名" required
                class="border border-gray-300 rounded-lg p-3 w-full" />
 
-        <select name="baptized" required class="border border-gray-300 rounded-lg p-3 w-full">
-            <option value="" disabled selected>是否受洗</option>
-            <option value="是">是</option>
-            <option value="否">否</option>
-        </select>
+        <input type="tel" name="phone" placeholder="电话号码" required
+               pattern="[\d\s\-+()]{7,}" title="请输入有效电话号码"
+               class="border border-gray-300 rounded-lg p-3 w-full" />
+
+        <input type="text" name="wechat" placeholder="微信（可选）"
+               class="border border-gray-300 rounded-lg p-3 w-full" />
 
         <select name="age" required class="border border-gray-300 rounded-lg p-3 w-full">
             <option value="" disabled selected>年龄范围</option>
@@ -52,7 +50,6 @@
         </button>
     </form>
 
-    <!-- 隐藏iframe，表单提交后页面不会跳转 -->
     <iframe name="hidden_iframe" style="display:none;"></iframe>
 
     <p class="mt-8 text-center text-sm text-gray-500">📞 联系方式：626-253-5600</p>
