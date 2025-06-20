@@ -43,6 +43,7 @@
 </div>
 
 <script>
+
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzvhS6C6bYFI3Zh2aTdPSDgXfzSoVxXbJxk9C_OirXccMASS4TI-626fWSxPkwVe8fP/exec';
     const form = document.getElementById('rsvp-form');
 
@@ -50,15 +51,11 @@
         e.preventDefault();
 
         const formData = new FormData(form);
-        const jsonData = {};
-        formData.forEach((value, key) => jsonData[key] = value);
 
         fetch(scriptURL, {
             method: 'POST',
-            body: JSON.stringify(jsonData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            body: formData,
+            // 不设置 headers，浏览器自动设置
         })
             .then(response => {
                 alert("✅ 感谢填写，我们已记录您的回复！");
@@ -69,6 +66,7 @@
                 console.error('Error!', error.message);
             });
     });
+
 </script>
 </body>
 </html>
