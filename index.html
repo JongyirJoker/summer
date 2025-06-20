@@ -6,16 +6,26 @@
     <title>共享夏日报名</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body
-        class="min-h-screen flex items-center justify-center"
-        style="background-image: url('summer2025.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat; margin: 0;"
->
+<body class="bg-yellow-50 relative min-h-screen flex flex-col items-center justify-start">
 
-<div class="max-w-xl w-full bg-white rounded-2xl shadow-lg p-8">
+<!-- ✅ 顶部横幅图 -->
+<img src="summer2025.jpeg" alt="顶部图片"
+     class="w-full max-h-48 object-cover" />
+
+<!-- ✅ 左侧图片 -->
+<img src="https://yourdomain.com/left-decor.png" alt="左图"
+     class="hidden md:block absolute top-1/3 left-0 w-32 opacity-70" />
+
+<!-- ✅ 右侧图片 -->
+<img src="https://yourdomain.com/right-decor.png" alt="右图"
+     class="hidden md:block absolute top-1/3 right-0 w-32 opacity-70" />
+
+<!-- ✅ 主内容容器 -->
+<div class="w-full max-w-xl bg-white bg-opacity-95 rounded-2xl shadow-lg p-8 mt-6 z-10 relative">
     <h1 class="text-4xl font-bold text-yellow-600 mb-6 text-center">共享夏日</h1>
     <p class="text-center text-gray-700 mb-2">🕔 时间：2025 年 07 月 19 日 下午 5:30 PM</p>
     <p class="text-center text-gray-700 mb-6">📍 地点：16152 Gale Ave, Hacienda Heights, CA, 91745 教会二楼</p>
-    <p class="text-center text-lg font-semibold mb-6">请大家点击按钮选择是否参加 🙌</p>
+    <p class="text-center text-lg font-semibold mb-6">请填写以下信息 🙌</p>
 
     <form
             action="https://script.google.com/macros/s/AKfycbzvhS6C6bYFI3Zh2aTdPSDgXfzSoVxXbJxk9C_OirXccMASS4TI-626fWSxPkwVe8fP/exec"
@@ -26,11 +36,10 @@
         <input type="text" name="name" placeholder="姓名" required
                class="border border-gray-300 rounded-lg p-3 w-full" />
 
-        <input type="tel" name="phone" placeholder="电话号码" required
-               pattern="[\d\s\-+()]{7,}" title="请输入有效电话号码"
+        <input type="text" name="phone" placeholder="电话号码" required
                class="border border-gray-300 rounded-lg p-3 w-full" />
 
-        <input type="text" name="wechat" placeholder="微信（可选）"
+        <input type="text" name="wechat" placeholder="微信号（可选）"
                class="border border-gray-300 rounded-lg p-3 w-full" />
 
         <select name="age" required class="border border-gray-300 rounded-lg p-3 w-full">
@@ -53,8 +62,6 @@
             ✅ 我要参加
         </button>
     </form>
-
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
 
     <p class="mt-8 text-center text-sm text-gray-500">📞 联系方式：626-253-5600</p>
 </div>
