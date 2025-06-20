@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>共享夏日报名</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -13,7 +13,7 @@
     <p class="text-center text-gray-700 text-lg mb-2">📍 地点：16152 Gale Ave, Hacienda Heights, CA, 91745 教会二楼</p>
     <p class="text-center text-gray-800 text-xl font-semibold my-6">请大家点击按钮选择是否参加 🙌</p>
 
-    <form class="flex flex-col gap-4" id="rsvp-form">
+    <form id="rsvp-form" class="flex flex-col gap-4">
         <input type="text" name="name" placeholder="姓名" required class="border rounded-lg p-2 w-full" />
         <select name="baptized" required class="border rounded-lg p-2 w-full">
             <option value="" disabled selected>是否受洗</option>
@@ -32,22 +32,42 @@
             <option value="" disabled selected>性别</option>
             <option value="男">男</option>
             <option value="女">女</option>
-
         </select>
 
-        <div class="flex flex-col gap-2">
-            <button type="submit" name="response" value="参加" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl">✅ 我要参加</button>
-        </div>
+        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl">
+            ✅ 我要参加
+        </button>
     </form>
 
     <p class="mt-6 text-center text-sm text-gray-500">📞 联系方式：626-253-5600</p>
 </div>
 
 <script>
-    document.getElementById("rsvp-form").addEventListener("submit", function(event) {
-        event.preventDefault();
-        alert("感谢填写，我们已记录您的回复 ✅");
-        this.reset();
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxek-Ls4juZ8IEmrw31dxNTIwZJUYBUJIEt0opULPtzsodPTyfR-NWKlNl0MtfFF0I/exec';
+    const form = document.getElementById('rsvp-form');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const jsonData = {};
+        formData.forEach((value, key) => jsonData[key] = value);
+
+        fetch(scriptURL, {
+            method: 'POST',
+            body: JSON.stringify(jsonData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                alert("✅ 感谢填写，我们已记录您的回复！");
+                form.reset();
+            })
+            .catch(error => {
+                alert("❌ 提交失败，请稍后重试");
+                console.error('Error!', error.message);
+            });
     });
 </script>
 </body>
