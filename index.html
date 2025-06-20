@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共享夏日报名</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-yellow-50 flex flex-col items-center justify-center min-h-screen px-6 py-10">
+<div class="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-8">
+    <h1 class="text-4xl font-bold text-center text-yellow-600 mb-4">共享夏日</h1>
+    <p class="text-center text-gray-700 text-lg mb-2">🕔 时间：2025 年 07 月 19 日 下午 5:30 PM</p>
+    <p class="text-center text-gray-700 text-lg mb-2">📍 地点：16152 Gale Ave, Hacienda Heights, CA, 91745 教会二楼</p>
+    <p class="text-center text-gray-800 text-xl font-semibold my-6">请大家点击按钮选择是否参加 🙌</p>
+
+    <form class="flex flex-col gap-4" id="rsvp-form">
+        <input type="text" name="name" placeholder="姓名" required class="border rounded-lg p-2 w-full" />
+        <select name="baptized" required class="border rounded-lg p-2 w-full">
+            <option value="" disabled selected>是否受洗</option>
+            <option value="是">是</option>
+            <option value="否">否</option>
+        </select>
+        <select name="age" required class="border rounded-lg p-2 w-full">
+            <option value="" disabled selected>年龄范围</option>
+            <option value="12岁以下">12岁以下</option>
+            <option value="13-18岁">13-18岁</option>
+            <option value="19-30岁">19-30岁</option>
+            <option value="31-50岁">31-50岁</option>
+            <option value="51岁以上">51岁以上</option>
+        </select>
+        <select name="gender" required class="border rounded-lg p-2 w-full">
+            <option value="" disabled selected>性别</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+            <option value="其他">其他</option>
+        </select>
+
+        <div class="flex flex-col gap-2">
+            <button type="submit" name="response" value="参加" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl">✅ 我要参加</button>
+        </div>
+    </form>
+
+    <p class="mt-6 text-center text-sm text-gray-500">📞 联系方式：626-253-5600</p>
+</div>
+
+<script>
+    document.getElementById("rsvp-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("感谢填写，我们已记录您的回复 ✅");
+        this.reset();
+    });
+</script>
+</body>
+</html>
