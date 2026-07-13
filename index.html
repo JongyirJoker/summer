@@ -68,7 +68,7 @@
             />
         </div>
 
-        <!-- 用户看到的格式化电话号码 -->
+        <!-- 用户输入的电话号码 -->
         <div>
             <label
                     for="phoneDisplay"
@@ -82,12 +82,12 @@
                     type="tel"
                     placeholder="请输入手机号码"
                     autocomplete="tel"
-                    inputmode="numeric"
-                    maxlength="14"
+                    inputmode="tel"
                     class="w-full border border-orange-200 rounded-lg p-3
                            outline-none focus:ring-2 focus:ring-orange-400
                            focus:border-orange-400"
             />
+
         </div>
 
         <!-- 提交给 Google Apps Script 的纯数字电话号码 -->
@@ -178,41 +178,18 @@
     const submitButton = document.getElementById("submitButton");
 
     /**
-     * 只保留数字，并限制为10位。
+     * 只保留电话号码中的数字。
+     * 不再限制为10位，也不会截断国家码。
      */
     function getPhoneDigits(value) {
-        return value.replace(/\D/g, "").slice(0, 10);
+        return value.replace(/\D/g, "");
     }
 
     /**
-     * 将号码显示为美国常见格式：
-     * (123) 456-7890
-     */
-    function formatPhoneNumber(value) {
-        const digits = getPhoneDigits(value);
-
-        if (digits.length === 0) {
-            return "";
-        }
-
-        if (digits.length <= 3) {
-            return `(${digits}`;
-        }
-
-        if (digits.length <= 6) {
-            return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-        }
-
-        return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-    }
-
-    /**
-     * 输入过程中自动格式化。
+     * 输入时保留用户习惯的格式，
+     * 同时把纯数字同步到隐藏字段。
      */
     phoneDisplayInput.addEventListener("input", function () {
-        this.value = formatPhoneNumber(this.value);
-
-        // 隐藏字段始终保存纯数字
         phoneHiddenInput.value = getPhoneDigits(this.value);
     });
 
@@ -239,8 +216,8 @@
             return;
         }
 
-        if (phoneDigits.length !== 10) {
-            alert("请输入完整的10位数字电话号码。");
+        if (phoneDigits.length < 10) {
+            alert("请输入完整的电话号码，至少需要10位数字。");
             phoneDisplayInput.focus();
             return;
         }
@@ -257,7 +234,7 @@
             return;
         }
 
-        // 提交给 Google Sheet 的电话号码为纯10位数字
+        // Google Sheet 中保存纯数字电话号码
         phoneHiddenInput.value = phoneDigits;
 
         submitButton.disabled = true;
